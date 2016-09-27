@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ntespm="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--防止inflate的时候失去margin，同时也为了以后方便维护代码，多一层是值得的-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:id="@+id/iv_owner_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                tools:src="@drawable/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_update_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:textColor="@color/text_color_light_grey2"
+                android:textSize="12sp"
+                tools:text="3-15 12:30"/>
+
+            <TextView
+                android:id="@+id/tv_owner_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@id/tv_update_time"
+                android:layout_toRightOf="@id/iv_owner_icon"
+                android:singleLine="true"
+                android:textColor="#FF4C618B"
+                android:textSize="14sp"
+                tools:text="作者名字"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_post_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="54dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/color_std_black"
+            android:text="这是帖子主体这是帖子主体这是帖子主体这是帖子主体这是帖子主体这是帖子主体"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:id="@+id/iv_post_picture"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginRight="54dp"
+            android:layout_marginLeft="54dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/login_dog"/>
+    </LinearLayout>
+
+</FrameLayout>
+

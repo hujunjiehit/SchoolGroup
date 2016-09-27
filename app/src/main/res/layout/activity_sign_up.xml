@@ -1,0 +1,190 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/android_layout_bg">
+<!--    tools:context=".BoxActivity"-->
+
+    <RelativeLayout
+        android:id="@+id/layout_sign_up_topbar"
+        style="@style/TopbarStyle" >
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="6dp"
+            android:src="@drawable/flight_title_back_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="手机快速注册"
+            android:textColor="@color/black"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/medium_text_size" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/layout_sign_up_topbar"
+        android:layout_marginTop="@dimen/item_margin_top"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/tv_uid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:text="账号："
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edit_uid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="37dp"
+                android:layout_marginRight="@dimen/item_margin_large"
+                android:layout_toRightOf="@+id/tv_uid"
+                android:background="@null"
+                android:hint="用户名/邮箱/手机号"
+                android:singleLine="true"
+                android:maxLength="32"
+                android:textSize="@dimen/small_middle_text_size" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="64dp"
+            android:background="#ffcccccc" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/tv_psw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:text="密码："
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edit_psw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="37dp"
+                android:layout_marginRight="@dimen/item_margin_large"
+                android:layout_toRightOf="@+id/tv_psw"
+                android:background="@null"
+                android:maxLength="16"
+                android:hint="6~16位大小写字母/数字"
+                android:inputType="textPassword"
+                android:textSize="@dimen/small_middle_text_size" />
+        </RelativeLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="64dp"
+            android:background="#ffcccccc" />
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/tv_psw_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:text="确认密码："
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edit_psw_val"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="@dimen/item_margin_large"
+                android:layout_toRightOf="@+id/tv_psw_val"
+                android:background="@null"
+                android:maxLength="16"
+                android:hint="6~16位大小写字母/数字"
+                android:inputType="textPassword"
+                android:textSize="@dimen/small_middle_text_size" />
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+    <CheckBox
+            android:id="@+id/btn_check"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_below="@+id/layout_detail"
+            android:button="@drawable/btn_check"
+            android:layout_marginTop="@dimen/item_margin_top"
+            android:layout_marginLeft="@dimen/item_margin_large"
+            android:checked="true"/>
+        <Button
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_margin="@dimen/item_margin_large"
+            android:layout_below="@+id/btn_check"
+            android:background="@drawable/btn_ok"
+            android:text="注  册"
+            android:textColor="@color/btn_login_text"
+            android:enabled="false" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_alignTop="@+id/btn_check"
+            android:layout_marginLeft="11dp"
+            android:layout_toRightOf="@+id/btn_check"
+            android:gravity="center"
+            android:textSize="@dimen/small_medium_text_size"
+            android:textColor="@color/dark"
+            android:text="同意" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_toRightOf="@+id/textView1"
+            android:gravity="center"
+            android:textSize="@dimen/small_medium_text_size"
+            android:textColor="@color/black"
+            android:text="京东用户注册协议" />
+
+</RelativeLayout>
