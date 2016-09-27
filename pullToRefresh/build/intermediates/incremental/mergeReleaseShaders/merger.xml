@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\workspace\YTX_Android_IM_Demo_v5.2.2r_AndroidStudio\pullToRefresh\src\main\shaders"/></dataSet><dataSet config="release"><source path="E:\workspace\YTX_Android_IM_Demo_v5.2.2r_AndroidStudio\pullToRefresh\src\release\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\git\SchoolGroup\pullToRefresh\src\main\shaders"/></dataSet><dataSet config="release"><source path="E:\git\SchoolGroup\pullToRefresh\src\release\shaders"/></dataSet></merger>
