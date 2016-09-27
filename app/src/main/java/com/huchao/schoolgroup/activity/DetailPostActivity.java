@@ -7,10 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huchao.schoolgroup.model.PostModel;
 import com.huchao.schoolgroup.utils.BitmapTools;
 import com.squareup.picasso.Picasso;
+import com.yuntongxun.ecsdk.ECDevice;
+import com.yuntongxun.ecsdk.ECError;
+import com.yuntongxun.ecsdk.ECGroupManager;
+import com.yuntongxun.ecsdk.SdkErrorCode;
 import com.yuntongxun.schoolgroup.R;
 
 import cn.bmob.v3.BmobQuery;
@@ -92,6 +97,10 @@ public class DetailPostActivity extends Activity implements View.OnClickListener
     switch (v.getId()){
       case R.id.tv_join_group:
         Log.e("DetailPostActivity","用户点击加入群聊");
+        if(mPostModel != null){
+          Log.e("DetailPostActivity","群组id：" + mPostModel.getGroupId());
+          joinTheGroup(mPostModel.getGroupId());
+        }
         break;
       case R.id.img_back:
         finish();
@@ -105,5 +114,33 @@ public class DetailPostActivity extends Activity implements View.OnClickListener
         break;
     }
 
+  }
+
+  private void joinTheGroup(String groupId) {
+
+    // 设置申请加入理由
+    String declare = "通过帖子主动加入";
+    // 获得SDK群组管理类
+    ECGroupManager groupManager = ECDevice.getECGroupManager();
+    // 调用审请加入群组接口，设置结果回调
+    groupManager.joinGroup(groupId, declare, new ECGroupManager.OnJoinGroupListener() {
+              @Override
+              public void onJoinGroupComplete(ECError error, String groupId) {
+                if((SdkErrorCode.REQUEST_SUCCESS == error.errorCode)|| (SdkErrorCode.MEMBER_ALREADY_EXIST == error.errorCode)) {
+                  // 申请加入群组成功(SdkErrorCode.MEMBER_ALREADY_EXIST代表申请者已经是群组成员)
+                  // 根据申请的群组权限（permission字段）来区分
+                  // 是否直接加入成功或者需要管理员审核
+//                  if(getpermission == 1) {
+//                    // 群组申请不需要验证，直接加入
+//                    // 这里可以跳转到群组聊天界面、更新UI
+//                    return;
+//                  }
+                  Toast.makeText(DetailPostActivity.this , "加入群组成功" , Toast.LENGTH_SHORT).show();
+                  return ;
+                }
+                // 群组申请失败
+                Log.e("ECSDK_Demo", "join group fail , errorCode=" + error.errorCode);
+              }
+            });
   }
 }

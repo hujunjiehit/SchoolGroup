@@ -14,23 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huchao.schoolgroup.message.adapter.MessageViewPagerAdapter;
-import com.huchao.schoolgroup.message.fragment.ChatFragment;
-import com.huchao.schoolgroup.message.fragment.ContactsFragment;
-import com.huchao.schoolgroup.message.fragment.FriendFragment;
-import com.huchao.schoolgroup.message.view.MessageUITabView;
+import com.huchao.schoolgroup.message.chatfragment.ChatFragment;
+import com.huchao.schoolgroup.message.chatfragment.ContactsFragment;
+import com.huchao.schoolgroup.message.chatfragment.FriendFragment;
 import com.yuntongxun.schoolgroup.R;
-import com.yuntongxun.schoolgroup.common.base.CCPCustomViewPager;
-import com.yuntongxun.schoolgroup.common.utils.LogUtil;
-import com.yuntongxun.schoolgroup.ui.BaseFragment;
-import com.yuntongxun.schoolgroup.ui.ConversationListFragment;
-import com.yuntongxun.schoolgroup.ui.DiscussionListFragment;
-import com.yuntongxun.schoolgroup.ui.GroupListFragment;
-import com.yuntongxun.schoolgroup.ui.LauncherActivity;
-import com.yuntongxun.schoolgroup.ui.TabFragment;
-import com.yuntongxun.schoolgroup.ui.contact.MobileContactActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

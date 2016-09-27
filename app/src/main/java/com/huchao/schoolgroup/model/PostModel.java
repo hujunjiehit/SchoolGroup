@@ -49,4 +49,12 @@ public class PostModel extends BmobObject{
   public void setPostPicture(BmobFile postPicture) {
     this.postPicture = postPicture;
   }
+
+  public String getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(String groupId) {
+    this.groupId = groupId;
+  }
 }

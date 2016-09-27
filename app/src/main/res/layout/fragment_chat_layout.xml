@@ -5,13 +5,11 @@
               android:background="@color/color_std_white"
               android:orientation="vertical" >
 
-    <TextView
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="聊天界面"
-        android:textColor="#FF0000"
-        android:textSize="20sp"
-        android:gravity="center"
-    ></TextView>
+        android:layout_height="match_parent">
+
+    </ListView>
 
 </LinearLayout>

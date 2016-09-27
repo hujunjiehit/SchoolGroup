@@ -1,4 +1,4 @@
-package com.huchao.schoolgroup.message.fragment;
+package com.huchao.schoolgroup.message.chatfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 
 import com.yuntongxun.schoolgroup.R;
 
-public class ChatFragment extends Fragment {
+/**
+ * Created by bjhujunjie on 2016/9/21.
+ */
 
+public class FriendFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     super.onCreateView(inflater, container, savedInstanceState);
-    View chatView = inflater.inflate(R.layout.fragment_chat_layout, container, false);
+    View chatView = inflater.inflate(R.layout.fragment_friend_layout, container, false);
     return chatView;
   }
 

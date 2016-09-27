@@ -250,33 +250,9 @@ public class NewPostActivity extends Activity implements View.OnClickListener {
     progressDialog.setMessage("正在发布中，请稍候...");
     progressDialog.setCancelable(false);
     progressDialog.show();
-    if (picturePath != null) {
-      //包含图片文件
-      final BmobFile bmobFile = new BmobFile(new File(picturePath));
-      postModel.setPostPicture(bmobFile);
-      bmobFile.uploadblock(new UploadFileListener() {
-        @Override
-        public void done(BmobException e) {
-          if (e == null) {
-            insertObject(postModel);
-          } else {
-            if(progressDialog != null && progressDialog.isShowing()){
-              progressDialog.dismiss();
-            }
-            Toast.makeText(NewPostActivity.this, "文件上传失败,请检查您的网络环境", Toast.LENGTH_SHORT).show();
-            Log.e("NewPostActivity", "file upload,fail   error:" + e.toString());
-          }
-        }
 
-        @Override
-        public void onProgress(Integer value) {
-          super.onProgress(value);
-        }
-      });
-    } else {
-      insertObject(postModel);
-    }
-
+    //创建群组，群组创建成功之后，再插入数据库
+    createPostGroup(postModel);
   }
 
   private void insertObject(final BmobObject obj) {
@@ -288,7 +264,6 @@ public class NewPostActivity extends Activity implements View.OnClickListener {
         }
         if (e == null) {
           Toast.makeText(NewPostActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-          createPostGroup(((PostModel)obj).getPostContent());
           finish();
         } else {
           Toast.makeText(NewPostActivity.this, "发布失败," + e.toString(), Toast.LENGTH_SHORT).show();
@@ -297,12 +272,12 @@ public class NewPostActivity extends Activity implements View.OnClickListener {
     });
   }
 
-  private void createPostGroup(String GroupName) {
+  private void createPostGroup(final PostModel postModel) {
     // 构建群组参数
     ECGroup group = new ECGroup();
 
     //设置群组名称
-    group.setName(GroupName);
+    group.setName(postModel.getPostContent());
 
     //设置群组公告
     group.setDeclare("欢迎体验云通讯群组功能");
@@ -330,6 +305,32 @@ public class NewPostActivity extends Activity implements View.OnClickListener {
           // 缓存创建的群组/讨论组到数据库，同时通知UI进行更新
           PersonInfo m;
           Log.e("test" , "create group sucess, GroupId = " +ecGroup.getGroupId()  + "    groupName = " + ecGroup.getName() + "  owner:" + ecGroup.getOwner());
+          postModel.setGroupId(ecGroup.getGroupId());
+          if (picturePath != null) {
+            //包含图片文件
+            final BmobFile bmobFile = new BmobFile(new File(picturePath));
+            postModel.setPostPicture(bmobFile);
+            bmobFile.uploadblock(new UploadFileListener() {
+              @Override
+              public void done(BmobException e) {
+                if (e == null) {
+                  insertObject(postModel);
+                } else {
+                  if(progressDialog != null && progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                  }
+                  Toast.makeText(NewPostActivity.this, "文件上传失败,请检查您的网络环境", Toast.LENGTH_SHORT).show();
+                  Log.e("NewPostActivity", "file upload,fail   error:" + e.toString());
+                }
+              }
+              @Override
+              public void onProgress(Integer value) {
+                super.onProgress(value);
+              }
+            });
+          } else {
+            insertObject(postModel);
+          }
           return ;
         }
         // 群组/讨论组创建失败

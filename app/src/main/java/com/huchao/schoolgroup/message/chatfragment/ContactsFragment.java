@@ -1,4 +1,4 @@
-package com.huchao.schoolgroup.message.fragment;
+package com.huchao.schoolgroup.message.chatfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
