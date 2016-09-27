@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<merger version="3"><dataSet config="main"><source path="E:\workspace\SchoolGroup\pullToRefresh\src\main\assets"/><source path="E:\workspace\SchoolGroup\pullToRefresh\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="E:\workspace\SchoolGroup\pullToRefresh\src\release\assets"/></dataSet></merger>
-=======
-<merger version="3"><dataSet config="main"><source path="E:\git\SchoolGroup\pullToRefresh\src\main\assets"/><source path="E:\git\SchoolGroup\pullToRefresh\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="E:\git\SchoolGroup\pullToRefresh\src\release\assets"/></dataSet></merger>
->>>>>>> bdf8145cab652a2ec12d9b4ecc96b6588341ce50
