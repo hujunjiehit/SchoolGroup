@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "E:\\workspace\\SchoolGroup\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pl\\values-pl.xml",
+=======
+        "outputFile": "E:\\git\\SchoolGroup\\pullToRefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-pl\\values-pl.xml",
+>>>>>>> bdf8145cab652a2ec12d9b4ecc96b6588341ce50
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 131
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\workspace\\SchoolGroup\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+=======
+                    "file": "E:\\git\\SchoolGroup\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+>>>>>>> bdf8145cab652a2ec12d9b4ecc96b6588341ce50
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 205
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\workspace\\SchoolGroup\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+=======
+                    "file": "E:\\git\\SchoolGroup\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+>>>>>>> bdf8145cab652a2ec12d9b4ecc96b6588341ce50
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 284
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\workspace\\SchoolGroup\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+=======
+                    "file": "E:\\git\\SchoolGroup\\pullToRefresh\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+>>>>>>> bdf8145cab652a2ec12d9b4ecc96b6588341ce50
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
