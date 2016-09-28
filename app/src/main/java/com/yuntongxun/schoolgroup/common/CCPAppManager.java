@@ -218,8 +218,7 @@ public class CCPAppManager {
             return code;
         }
         try {
-            PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(
-                    getPackageName(), 0);
+            PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(getPackageName(), 0);
             code = packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

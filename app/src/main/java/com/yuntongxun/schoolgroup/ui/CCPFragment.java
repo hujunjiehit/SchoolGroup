@@ -73,8 +73,7 @@ public abstract class CCPFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.mBaseActivity.setRootConsumeWatcher(null);
         return mBaseActivity.mBaseLayoutView;
     }
@@ -160,7 +159,6 @@ public abstract class CCPFragment extends Fragment {
             getActivity().finish();
             return;
         }
-
         getActivity().getSupportFragmentManager().popBackStack();
     }
 

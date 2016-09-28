@@ -33,6 +33,7 @@ import com.yuntongxun.ecsdk.PersonInfo;
 import com.yuntongxun.ecsdk.SdkErrorCode;
 import com.yuntongxun.ecsdk.im.ECGroup;
 import com.yuntongxun.schoolgroup.R;
+import com.yuntongxun.schoolgroup.storage.GroupSqlManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -111,6 +112,7 @@ public class NewPostActivity extends Activity implements View.OnClickListener {
         postModel.setOwnerName(bmobUser.getUsername());
         postModel.setPostContent(post_content);
         sendNewPost(postModel);
+        //GroupSqlManager.getInstance();
         break;
       case R.id.img_back:
         finish();
@@ -286,7 +288,7 @@ public class NewPostActivity extends Activity implements View.OnClickListener {
     group.setScope(ECGroup.Scope.TEMP);
 
     //设置群组验证权限，如：需要身份验证ECGroup.Permission.NEED_AUTH
-    group.setPermission(ECGroup.Permission.NEED_AUTH);
+    group.setPermission(ECGroup.Permission.AUTO_JOIN);
 
     //设置群组创建者（可以不设置，服务器默认接口调用者为创建者）
     group.setOwner(bmobUser.getObjectId());

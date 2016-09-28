@@ -16,6 +16,10 @@ import com.yuntongxun.ecsdk.ECError;
 import com.yuntongxun.ecsdk.ECInitParams;
 import com.yuntongxun.ecsdk.SdkErrorCode;
 import com.yuntongxun.schoolgroup.R;
+import com.yuntongxun.schoolgroup.common.CCPAppManager;
+import com.yuntongxun.schoolgroup.common.utils.FileAccessor;
+import com.yuntongxun.schoolgroup.core.ClientUser;
+import com.yuntongxun.schoolgroup.ui.SDKCoreHelper;
 
 import cn.bmob.v3.BmobUser;
 
@@ -24,6 +28,8 @@ public class MainActivity extends FragmentActivity {
   private FragmentTabHost mTabHost;
   private String uid;
   private String userName;
+
+  ECInitParams.LoginAuthType mLoginAuthType = ECInitParams.LoginAuthType.NORMAL_AUTH;
 
   private Class[] mFragments = new Class[] { DiscoveryFragment.class,
       MessageFragment.class, MineFragment.class, MineFragment.class};
@@ -45,79 +51,27 @@ public class MainActivity extends FragmentActivity {
     if(getIntent() != null){
       Log.e("test","MainActivity, uid = " + getIntent().getStringExtra("uid"));
       uid = getIntent().getStringExtra("uid");
-
-      if(!ECDevice.isInitialized()) {
-        ECDevice.initial(this, new ECDevice.InitListener() {
-          @Override
-          public void onInitialized() {
-            // SDK已经初始化成功
-            Log.e("test","Yuntx SDK 初始化成功");
-
-            ECInitParams params = ECInitParams.createParams();
-            params.setUserid(uid);
-            params.setAppKey("8aaf0708570871f8015731e957fa13db");
-            params.setToken("c185ae10e1a9d6a193f7f9953260c78c");
-            // 设置登陆验证模式（是否验证密码）NORMAL_AUTH-自定义方式
-            params.setAuthType(ECInitParams.LoginAuthType.NORMAL_AUTH);
-            // 1代表用户名+密码登陆（可以强制上线，踢掉已经在线的设备）
-            // 2代表自动重连注册（如果账号已经在其他设备登录则会提示异地登陆）
-            // 3 LoginMode（强制上线：FORCE_LOGIN  默认登录：AUTO）
-            params.setMode(ECInitParams.LoginMode.FORCE_LOGIN);
-
-
-
-            ECDevice.setOnDeviceConnectListener(new ECDevice.OnECDeviceConnectListener() {
-              @Override
-              public void onConnect() {
-
-              }
-
-              @Override
-              public void onDisconnect(ECError ecError) {
-
-              }
-
-              @Override
-              public void onConnectState(ECDevice.ECConnectState state, ECError error) {
-                if(state == ECDevice.ECConnectState.CONNECT_FAILED ){
-                  if(error.errorCode == SdkErrorCode.SDK_KICKED_OFF) {
-                    //账号异地登陆
-                    Log.e("test","账号异地登陆");
-                  } else {
-                    //连接状态失败
-                    Log.e("test","连接状态失败, error.errorCode = " + error.errorCode);
-                  }
-                  return ;
-                }else if(state == ECDevice.ECConnectState.CONNECT_SUCCESS) {
-                  // 登陆成功
-                  Log.e("test","账号登录成功");
-
-                }
-              }
-            });
-
-            if(params.validate()) {
-              // 判断注册参数是否正确
-              ECDevice.login(params);
-            }
-          }
-
-          @Override
-          public void onError(Exception exception) {
-            // SDK 初始化失败,可能有如下原因造成
-            // 1、可能SDK已经处于初始化状态
-            // 2、SDK所声明必要的权限未在清单文件（AndroidManifest.xml）里配置、
-            //    或者未配置服务属性android:exported="false";
-            // 3、当前手机设备系统版本低于ECSDK所支持的最低版本（当前ECSDK支持
-            //    Android Build.VERSION.SDK_INT 以及以上版本）
-            Log.e("test","Yuntx SDK 初始化失败，exception:" + exception.toString());
-          }
-        });
-      }
+      initLogin(uid);
     }
     mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
     mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
     addTab();
+  }
+
+  private void initLogin(String uid) {
+    String appkey = FileAccessor.getAppKey();
+    String token = FileAccessor.getAppToken();
+    Log.e("hujunjie", "getAppKey: " +  appkey);
+    Log.e("hujunjie", "getAppToken: " +  token);
+
+    ClientUser clientUser = new ClientUser(uid);
+    clientUser.setAppKey(appkey);
+    clientUser.setAppToken(token);
+    clientUser.setLoginAuthType(mLoginAuthType);
+    //clientUser.setPassword(pass);
+    CCPAppManager.setClientUser(clientUser);
+    SDKCoreHelper.init(this, ECInitParams.LoginMode.FORCE_LOGIN);
+
   }
 
   private void addTab() {

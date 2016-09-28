@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.yuntongxun.schoolgroup.ECApplication;
 import com.yuntongxun.schoolgroup.R;
@@ -84,7 +85,8 @@ public class SDKCoreHelper implements ECDevice.InitListener , ECDevice.OnECDevic
     public static void init(Context ctx , ECInitParams.LoginMode mode) {
         getInstance().mKickOff = false;
         LogUtil.d(TAG , "[init] start regist..");
-        ctx = ECApplication.getInstance().getApplicationContext();
+        Log.e("hujunjie", "init sdk");
+        //ctx = ECApplication.getInstance().getApplicationContext();
         getInstance().mMode = mode;
         getInstance().mContext = ctx;
         // 判断SDK是否已经初始化，没有初始化则先初始化SDK
@@ -92,10 +94,10 @@ public class SDKCoreHelper implements ECDevice.InitListener , ECDevice.OnECDevic
             getInstance().mConnect = ECDevice.ECConnectState.CONNECTING;
             // ECSDK.setNotifyOptions(getInstance().mOptions);
             ECDevice.initial(ctx, getInstance());
-
-            postConnectNotify();
+            //postConnectNotify();
             return ;
         }
+        Log.e("hujunjie", "sdk 已经初始化成功");
         LogUtil.d(TAG, " SDK has inited , then regist..");
         // 已经初始化成功，直接进行注册
         getInstance().onInitialized();
@@ -129,6 +131,8 @@ public class SDKCoreHelper implements ECDevice.InitListener , ECDevice.OnECDevic
     @Override
     public void onInitialized() {
         LogUtil.d(TAG, "ECSDK is ready");
+
+        Log.e("hujunjie", "sdk is ready");
 
         // 设置消息提醒
         ECDevice.setNotifyOptions(mOptions);
@@ -177,7 +181,7 @@ public class SDKCoreHelper implements ECDevice.InitListener , ECDevice.OnECDevic
         }
 
 
-
+        Log.e("hujunjie", "login yuntongxun sucess");
         ECDevice.login(mInitParams);
         //调式
 

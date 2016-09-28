@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.huchao.schoolgroup.activity.LoginActivity;
 import com.huchao.schoolgroup.activity.MainActivity;
 import com.yuntongxun.schoolgroup.R;
+import com.yuntongxun.schoolgroup.storage.GroupSqlManager;
 
 import cn.bmob.v3.BmobUser;
 
@@ -70,6 +71,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     switch (v.getId()) {
       case R.id.tv_more: // 注销登录
         BmobUser.logOut();
+
+        GroupSqlManager.reset(); //清空数据库操作缓存，避免数据错乱
+
         startActivity(new Intent(getActivity(), LoginActivity.class));
         getActivity().finish();
         break;

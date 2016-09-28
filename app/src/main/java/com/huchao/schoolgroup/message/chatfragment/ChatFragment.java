@@ -39,6 +39,7 @@ public class ChatFragment extends Fragment {
     getGroups();
   }
 
+
   private void getGroups() {
     // 获得SDK群组创建管理类
     ECGroupManager groupManager = ECDevice.getECGroupManager();

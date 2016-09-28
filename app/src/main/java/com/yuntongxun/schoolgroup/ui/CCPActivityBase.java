@@ -104,19 +104,15 @@ public abstract class CCPActivityBase {
 
         if(getTitleLayout() != -1) {
             mTopBarView = mLayoutInflater.inflate(getTitleLayout() , null);
-            mRootView.addView(mTopBarView,
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            mRootView.addView(mTopBarView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
 
         if (layoutId != -1) {
-
             mContentView = getContentLayoutView();
             if(mContentView == null) {
                 mContentView = mLayoutInflater.inflate(getLayoutId(), null);
             }
-            mRootView.addView(mContentView, LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT);
+            mRootView.addView(mContentView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         }
 
         dealContentView(mBaseLayoutView);

@@ -16,6 +16,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.yuntongxun.schoolgroup.ECApplication;
 import com.yuntongxun.schoolgroup.common.CCPAppManager;
@@ -37,7 +38,8 @@ public abstract class AbstractSQLManager {
     private static SQLiteDatabase sqliteDB;
 
     public AbstractSQLManager() {
-        openDatabase(ECApplication.getInstance(), CCPAppManager.getVersionCode());
+      Log.e("hujunjie","construct AbstractSQLManager,versionCode = " + CCPAppManager.getVersionCode() + "  userId = " +CCPAppManager.getClientUser().getUserId());
+      openDatabase(ECApplication.getInstance(), CCPAppManager.getVersionCode());
     }
 
     private void openDatabase(Context context, int databaseVersion) {
@@ -47,6 +49,7 @@ public abstract class AbstractSQLManager {
         //DatabaseManager.initializeInstance(databaseHelper);
         if (sqliteDB == null) {
             sqliteDB = databaseHelper.getWritableDatabase();
+          Log.e("hujunjie","open database sucess");
             //sqliteDB = DatabaseManager.getInstance().openDatabase();
         }
 
@@ -119,8 +122,7 @@ public abstract class AbstractSQLManager {
 
         }
 
-        public DatabaseHelper(Context context, AbstractSQLManager manager , String name,
-                              CursorFactory factory, int version) {
+        public DatabaseHelper(Context context, AbstractSQLManager manager , String name, CursorFactory factory, int version) {
             super(context, name, factory, version);
             mAbstractSQLManager = manager ;
         }
@@ -233,16 +235,22 @@ public abstract class AbstractSQLManager {
          * @param db
          */
         private void createTables(SQLiteDatabase db) {
+
             // 创建联系人表
             createTableForContacts(db);
+
             // 创建Im信息表
             createTableForIMessage(db);
+
             // 创建im会话表
             createTableForISession(db);
+
             // 创建触发器
             createTriggerForIMessage(db);
+
             // 创建群组表
             createTaleForIMGroups(db);
+
             /**创建群组成员表结构*/
             createTableGroupMembers(db);
 

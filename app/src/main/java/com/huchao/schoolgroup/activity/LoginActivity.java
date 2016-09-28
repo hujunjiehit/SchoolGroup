@@ -50,6 +50,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, Com
     super.onCreate(savedInstanceState);
     BmobUser bmobUser = BmobUser.getCurrentUser();
     Log.e("LoginActivity","bmobUser = " + bmobUser);
+
     if(bmobUser != null){
       // 允许用户使用应用
       Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -58,6 +59,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, Com
       overridePendingTransition(0, 0);
       LoginActivity.this.finish();
     }
+
     setContentView(R.layout.activity_login_schoolgroup);
     initUI();
     setOnListener();

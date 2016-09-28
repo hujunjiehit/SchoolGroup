@@ -18,6 +18,8 @@ import com.huchao.schoolgroup.message.chatfragment.ChatFragment;
 import com.huchao.schoolgroup.message.chatfragment.ContactsFragment;
 import com.huchao.schoolgroup.message.chatfragment.FriendFragment;
 import com.yuntongxun.schoolgroup.R;
+import com.yuntongxun.schoolgroup.ui.ConversationListFragment;
+import com.yuntongxun.schoolgroup.ui.GroupListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
   private ChatFragment mChatFg;
   private FriendFragment mFriendFg;
   private ContactsFragment mContactsFg;
+  private GroupListFragment mGroupListFragment;
+  private ConversationListFragment mConversationListFragment;
 
   /**
    * ViewPager的当前选中页
@@ -93,7 +97,10 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
     mFriendFg = new FriendFragment();
     mContactsFg = new ContactsFragment();
     mChatFg = new ChatFragment();
-    mFragmentList.add(mChatFg);
+    mGroupListFragment = new GroupListFragment();
+    mConversationListFragment = new ConversationListFragment();
+
+    mFragmentList.add(mGroupListFragment);
     mFragmentList.add(mFriendFg);
     mFragmentList.add(mContactsFg);
 
@@ -110,7 +117,6 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
       @Override
       public void onPageScrolled(int position, float offset, int positionOffsetPixels) {
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv.getLayoutParams();
-        Log.e("offset:", offset + "");
         /**
          * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
          * 设置mTabLineIv的左边距 滑动场景：
@@ -142,6 +148,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener{
         switch (position) {
           case 0:
             mTabChatTv.setTextColor(Color.BLUE);
+            mGroupListFragment.onGroupFragmentVisible(true);
             break;
           case 1:
             mTabFriendTv.setTextColor(Color.BLUE);

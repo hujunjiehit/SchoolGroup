@@ -13,6 +13,7 @@
 package com.yuntongxun.schoolgroup.ui.group;
 
 import android.content.Intent;
+import android.util.Log;
 
 
 import com.yuntongxun.schoolgroup.common.CCPAppManager;
@@ -81,6 +82,9 @@ public class GroupService {
      */
     @SuppressWarnings("deprecation")
 	public static void syncGroup(Callback callback) {
+
+        Log.e("hujunjie","sync Groups from the server");
+
         getInstance().mGroupManager = SDKCoreHelper.getECGroupManager();
         if(getInstance().mGroupManager == null || getInstance().isSync) {
             LogUtil.e(TAG, "SDK not ready or isSync " + getInstance().isSync);
@@ -88,25 +92,35 @@ public class GroupService {
         }
         getInstance().isSync = true;
         getInstance().mCallback = callback;
-        
-        
+
+        Log.e("hujunjie","now exec queryOwnGroups");
         getInstance().mGroupManager.queryOwnGroups(Target.GROUP ,new ECGroupManager.OnQueryOwnGroupsListener() {
 
             @Override
             public void onQueryOwnGroupsComplete(ECError error, List<ECGroup> groups) {
                 if(getInstance().isSuccess(error)) {
+                    Log.e("hujunjie","request sucess, groups = " + groups);
                     if (groups == null || groups.isEmpty()) {
                         GroupSqlManager.delALLGroup();
                     } else {
-                        LogUtil.d(TAG , "[syncGroup] groups size :" +groups.size());
-                        List<String> allGroupIdByJoin = GroupSqlManager.getAllGroupIdBy(true);
-                        ArrayList<String> ids = new ArrayList<String>();
+                        LogUtil.d(TAG , "[syncGroup] groups size :" + groups.size());
+
+                        Log.e("hujunjie","groups size = " + groups.size());
+
+                        List<String> allGroupIdByJoin = GroupSqlManager.getAllGroupIdBy(true); //数据库中记录的已加入群组
+
+                        ArrayList<String> ids = new ArrayList<String>(); //groups、ids记录从云通讯服务器查询到的群组
                         for (ECGroup group : groups) {
                             ids.add(group.getGroupId());
                         }
 
+                        Log.e("hujunjie","the group ids from network： = " + ids);
+                        Log.e("hujunjie","the group ids from database： = " + allGroupIdByJoin);
+
+
                         // 查找不是我的群组
                         if (!allGroupIdByJoin.isEmpty()) {
+                            //遍历数据库中记录的已加入群组，判断该群组
                             for (String id : allGroupIdByJoin) {
                                 if (ids.contains(id)) {
                                     continue;
@@ -115,21 +129,24 @@ public class GroupService {
                                 GroupSqlManager.updateUNJoin(id);
                             }
                         }
+
                         GroupSqlManager.insertGroupInfos(groups, 1);
                     }
+
                     getInstance().isSync = false;
+
                     // 更新公共所有群组
-                    // syncPublicGroups();
+                    //syncPublicGroups();
                     if (getInstance().mCallback != null) {
                         getInstance().mCallback.onSyncGroup();
                     }
                     if (CCPAppManager.getContext() != null) {
                         CCPAppManager.getContext().sendBroadcast(new Intent((ACTION_SYNC_GROUP)));
+                        CCPAppManager.getContext().sendBroadcast(new Intent(IMessageSqlManager.ACTION_SESSION_DEL));
                     }
-                    CCPAppManager.getContext().sendBroadcast(
-                            new Intent(IMessageSqlManager.ACTION_SESSION_DEL));
                     return ;
                 }
+                Log.e("hujunjie","request groups failed");
                 onErrorCallback(error.errorCode, "同步群组失败");
             }
         });
